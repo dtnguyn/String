@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/first_time_graph"
+    app:startDestination="@id/interest_fragment">
+
+    <fragment
+        android:id="@+id/interest_fragment"
+        android:name="com.nguyen.string.ui.firstTime.FirstTimeFragment"
+        android:label="interest_fragment"
+        tools:layout="@layout/fragment_first_time">
+
+    </fragment>
+
+
+
+</navigation>

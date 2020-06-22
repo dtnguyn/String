@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/auth_graph"
+    app:startDestination="@id/start_fragment">
+
+    <fragment
+        android:id="@+id/start_fragment"
+        android:name="com.nguyen.string.ui.auth.StartFragment"
+        android:label="start_fragment"
+        tools:layout="@layout/fragment_start">
+
+        <action
+            android:id="@+id/action_start_to_register"
+            app:destination="@id/register_fragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"/>
+
+        <action
+            android:id="@+id/action_start_to_login"
+            app:destination="@id/login_fragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/register_fragment"
+        android:name="com.nguyen.string.ui.auth.RegisterFragment"
+        android:label="register_fragment"
+        tools:layout="@layout/fragment_register">
+
+        <action
+            android:id="@+id/action_register_to_verification"
+            app:destination="@id/register_verification_fragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"/>
+
+        <action
+            android:id="@+id/action_register_to_login"
+            app:destination="@id/login_fragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"/>
+        <action
+            android:id="@+id/action_register_to_terms"
+            app:destination="@id/terms_of_service_fragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/register_verification_fragment"
+        android:name="com.nguyen.string.ui.auth.RegisterVerificationFragment"
+        android:label="register_verification_fragment"
+        tools:layout="@layout/fragment_register_verification">
+    </fragment>
+
+    <fragment
+        android:id="@+id/login_fragment"
+        android:name="com.nguyen.string.ui.auth.LoginFragment"
+        android:label="login_fragment"
+        tools:layout="@layout/fragment_login">
+
+
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/terms_of_service_fragment"
+        android:name="com.nguyen.string.ui.auth.TermsServiceFragment"
+        android:label="terms_of_service_fragment"
+        tools:layout="@layout/fragment_terms_service">
+    </fragment>
+
+
+
+
+</navigation>
