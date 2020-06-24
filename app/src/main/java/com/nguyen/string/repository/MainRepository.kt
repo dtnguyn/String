@@ -3,10 +3,7 @@ package com.nguyen.string.repository
 import android.util.Log
 import com.nguyen.string.MainApplication
 import com.nguyen.string.api.MyRetrofitBuilder
-import com.nguyen.string.data.authenticationData.AuthData
-import com.nguyen.string.data.ApiResponse
-import com.nguyen.string.data.interestData.Interest
-import com.nguyen.string.data.userData.User
+import com.nguyen.string.data.*
 import com.nguyen.string.util.SavedSharedPreferences
 import retrofit2.Call
 import retrofit2.Callback
@@ -14,8 +11,12 @@ import retrofit2.Response
 
 object MainRepository{
 
+    private const val ITEM_PER_PAGE = 10
+
     var verificationEmail : String? = null
-    var currentLoggedUser: AuthData? = null
+    private var currentLoggedUser: AuthData? = null
+    private var feedCurrentPage: Int = 1
+    private var isLoadingMoreFeed = false
 
 
     init {
@@ -150,6 +151,77 @@ object MainRepository{
                 Log.d("User", "Success to follow user ${response.body()}")
             }
 
+        })
+    }
+
+    fun submitSelectedInterestList(interests: List<Interest>){
+        val call = currentLoggedUser?.accessToken?.let{
+            MyRetrofitBuilder.apiService.submitSelectedInterest(interests, "Bearer $it")
+        }
+
+        call?.enqueue(object: Callback<ApiResponse<User>>{
+            override fun onFailure(call: Call<ApiResponse<User>>, t: Throwable) {
+                Log.d("Interest", "Fail to submit interest list ${t.message}")
+            }
+
+            override fun onResponse(
+                call: Call<ApiResponse<User>>,
+                response: Response<ApiResponse<User>>
+            ) {
+                Log.d("Interest", "success submit interest list ${response.body()}")
+            }
+
+        })
+    }
+
+    fun getFeed(callback: (ApiResponse<List<Blog>>?) -> Unit){
+        feedCurrentPage = 1 //Initialize it back to the first page
+        val call = currentLoggedUser?.accessToken?.let{
+            MyRetrofitBuilder.apiService.getFeed(feedCurrentPage.toString(), ITEM_PER_PAGE.toString(), "Bearer $it")
+        }
+
+        call?.enqueue(object : Callback<ApiResponse<List<Blog>>>{
+            override fun onFailure(call: Call<ApiResponse<List<Blog>>>, t: Throwable) {
+                Log.d("Feed", "Fail to load feed ${t.message}")
+            }
+
+            override fun onResponse(
+                call: Call<ApiResponse<List<Blog>>>,
+                response: Response<ApiResponse<List<Blog>>>
+            ) {
+                response.body().let {
+                    Log.d("Feed", "Success: ${it?.message}")
+                    callback(it)
+                }
+            }
+        })
+    }
+
+    fun getMoreFeed(callback: (ApiResponse<List<Blog>>?) -> Unit){
+        if(isLoadingMoreFeed) return
+        Log.d("Feed", "Loading more feed")
+        feedCurrentPage++
+        isLoadingMoreFeed = true
+        val call = currentLoggedUser?.accessToken?.let{
+            MyRetrofitBuilder.apiService.getFeed(feedCurrentPage.toString(), ITEM_PER_PAGE.toString(), "Bearer $it")
+        }
+
+        call?.enqueue(object : Callback<ApiResponse<List<Blog>>>{
+            override fun onFailure(call: Call<ApiResponse<List<Blog>>>, t: Throwable) {
+                Log.d("Feed", "Fail to load feed ${t.message}")
+                isLoadingMoreFeed = false
+            }
+
+            override fun onResponse(
+                call: Call<ApiResponse<List<Blog>>>,
+                response: Response<ApiResponse<List<Blog>>>
+            ) {
+                isLoadingMoreFeed = false
+                response.body().let {
+                    Log.d("Feed", "Success: ${it?.message}")
+                    callback(it)
+                }
+            }
         })
     }
 

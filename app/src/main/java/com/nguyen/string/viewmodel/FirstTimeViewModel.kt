@@ -2,8 +2,8 @@ package com.nguyen.string.viewmodel
 
 import androidx.lifecycle.*
 import com.nguyen.string.data.ApiResponse
-import com.nguyen.string.data.interestData.Interest
-import com.nguyen.string.data.userData.User
+import com.nguyen.string.data.Interest
+import com.nguyen.string.data.User
 import com.nguyen.string.repository.MainRepository
 
 class FirstTimeViewModel (private val repository: MainRepository) : ViewModel(){
@@ -34,6 +34,11 @@ class FirstTimeViewModel (private val repository: MainRepository) : ViewModel(){
     fun followUser(userId: String){
         repository.followUser(userId)
     }
+
+    fun submitSelectedInterestList(interests: List<Interest>){
+        repository.submitSelectedInterestList(interests)
+    }
+
 }
 
 

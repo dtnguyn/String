@@ -7,11 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.nguyen.string.R
-import com.nguyen.string.data.interestData.Interest
-import com.nguyen.string.data.userData.User
+import com.nguyen.string.data.Interest
+import com.nguyen.string.data.User
 import com.nguyen.string.databinding.FollowUserItemBinding
 import com.nguyen.string.databinding.InterestItemBinding
+import com.nguyen.string.ui.firstTime.FirstTimeFragment.Companion.addInterest
 import com.nguyen.string.ui.firstTime.FirstTimeFragment.Companion.getPage
+import com.nguyen.string.ui.firstTime.FirstTimeFragment.Companion.removeInterest
 
 class FirstTimeAdapter(
     private val interests: List<Any>,
@@ -35,9 +37,10 @@ class FirstTimeAdapter(
         override fun bind(interestOrUser: Any, map : HashMap<String, Boolean>, update: (counter: Int) -> Unit, follow: (userId: String) -> Unit) {
 
             var clicking = true
+            interestOrUser as Interest
 
             binding.apply {
-                interest = interestOrUser as Interest
+                interest = interestOrUser
                 executePendingBindings()
             }
 
@@ -51,8 +54,14 @@ class FirstTimeAdapter(
                     return@setOnCheckedChangeListener
                 }
                 binding.interest?.photo?.id?.let { map[it] = checked }
-                if(checked) counter++
-                else counter--
+                if(checked){
+                    counter++
+                    addInterest(interestOrUser)
+                } else {
+                    counter--
+                    removeInterest(interestOrUser.id!!)
+                }
+
                 update.invoke(counter)
             }
 

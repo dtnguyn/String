@@ -1,9 +1,6 @@
 package com.nguyen.string.api
 
-import com.nguyen.string.data.authenticationData.AuthData
-import com.nguyen.string.data.ApiResponse
-import com.nguyen.string.data.interestData.Interest
-import com.nguyen.string.data.userData.User
+import com.nguyen.string.data.*
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -55,6 +52,20 @@ interface ApiService {
         @Query("current_per_page") currentPage: String?,
         @Header("Authorization") token: String
     ): Call<ApiResponse<List<User>>>
+
+    @GET("feed")
+    fun getFeed(
+        @Query("page") page: String?,
+        @Query("current_per_page") currentPage: String?,
+        @Header("Authorization") token: String
+    ): Call<ApiResponse<List<Blog>>>
+
+
+    @PUT("users-interest-categories-select")
+    fun submitSelectedInterest(
+        @Query("lists_interest[]") selectedInterestList: List<Interest>,
+        @Header("Authorization") token: String
+    ): Call<ApiResponse<User>>
 
 
 }

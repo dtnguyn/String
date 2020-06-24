@@ -3,7 +3,7 @@ package com.nguyen.string.util
 import android.content.Context
 import android.content.SharedPreferences
 import com.google.gson.Gson
-import com.nguyen.string.data.authenticationData.AuthData
+import com.nguyen.string.data.AuthData
 
 object SavedSharedPreferences {
     private const val NAME = "StringSharedPreferences"
@@ -12,8 +12,9 @@ object SavedSharedPreferences {
     private lateinit var mGson : Gson
 
     //SharedPreferences variables
-    private val IS_LOGIN = "is_login"
-    private val LOGGED_USER = "logged_user"
+    private const val IS_LOGIN = "is_login"
+    private const val LOGGED_USER = "logged_user"
+    private const val NOTIFICATION_PERMISSION ="notification_permission"
 
     fun init(context: Context) {
         preferences = context.getSharedPreferences(NAME, MODE)

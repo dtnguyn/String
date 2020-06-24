@@ -7,7 +7,7 @@
         <import type="android.view.View"/>
         <variable
             name="user"
-            type="com.nguyen.string.data.userData.User" />
+            type="com.nguyen.string.data.User" />
         <variable
             name="sudo"
             type="Boolean" />
@@ -27,7 +27,7 @@
 
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/imageView3"
+            android:id="@+id/user_avatar_post"
             android:layout_width="50dp"
             android:layout_height="50dp"
             app:layout_constraintStart_toStartOf="parent"
@@ -51,9 +51,9 @@
             android:text="@{user.username}"
             android:textSize="16sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView3"
-            app:layout_constraintStart_toEndOf="@+id/imageView3"
-            app:layout_constraintTop_toTopOf="@+id/imageView3"
+            app:layout_constraintBottom_toBottomOf="@+id/user_avatar_post"
+            app:layout_constraintStart_toEndOf="@+id/user_avatar_post"
+            app:layout_constraintTop_toTopOf="@+id/user_avatar_post"
             android:layout_marginStart="10dp" />
 
         <ImageView
@@ -72,7 +72,7 @@
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView3"
+            app:layout_constraintBottom_toBottomOf="@+id/user_avatar_post"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -85,8 +85,8 @@
             app:cardElevation="0dp"
             app:cardCornerRadius="10dp"
             app:layout_constraintEnd_toEndOf="@id/follow_button"
-            app:layout_constraintStart_toStartOf="@+id/imageView3"
-            app:layout_constraintTop_toBottomOf="@+id/imageView3">
+            app:layout_constraintStart_toStartOf="@+id/user_avatar_post"
+            app:layout_constraintTop_toBottomOf="@+id/user_avatar_post">
 
             <GridLayout
                 android:layout_width="match_parent"

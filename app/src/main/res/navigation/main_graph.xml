@@ -4,8 +4,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/first_time_graph"
-    app:startDestination="@id/first_time_fragment">
+    app:startDestination="@id/feed_fragment">
 
+
+    <fragment
+        android:id="@+id/feed_fragment"
+        android:name="com.nguyen.string.ui.main.FeedFragment"
+        android:label="feed_fragment"
+        tools:layout="@layout/fragment_feed"/>
 
     <fragment
         android:id="@+id/first_time_fragment"

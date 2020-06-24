@@ -2,7 +2,7 @@ package com.nguyen.string.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.*
-import com.nguyen.string.data.authenticationData.AuthData
+import com.nguyen.string.data.AuthData
 import com.nguyen.string.data.ApiResponse
 import com.nguyen.string.repository.MainRepository
 

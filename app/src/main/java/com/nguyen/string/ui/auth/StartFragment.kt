@@ -43,7 +43,6 @@ class StartFragment : Fragment() {
         }
 
 
-
         view.sign_up_with_facebook_button.setOnClickListener {
             if (AccessToken.getCurrentAccessToken() != null) {
                 LoginManager.getInstance().logOut()

@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="post"
+            type="com.nguyen.string.data.Blog" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/user_avatar_post"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            app:cardCornerRadius="40dp"
+            android:layout_margin="15dp"
+            android:layout_centerHorizontal="true"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                imageFromUrl="@{post.user.profilePhoto}"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/user_avatar"
+                android:scaleType="centerCrop"
+                android:src="@drawable/default_user_icon" />
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{post.user.username}"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="10dp"
+            android:textStyle="bold"
+            android:textColor="@color/textColor"
+            android:textSize="16sp"
+            app:layout_constraintStart_toEndOf="@+id/user_avatar_post"
+            app:layout_constraintTop_toTopOf="@+id/user_avatar_post" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{post.createdAt}"
+            android:layout_marginStart="10dp"
+            android:layout_marginBottom="5dp"
+            app:layout_constraintBottom_toBottomOf="@+id/user_avatar_post"
+            app:layout_constraintStart_toEndOf="@+id/user_avatar_post" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_margin="15dp"
+            android:background="@color/background"
+            android:minWidth="90dp"
+            app:cardCornerRadius="30dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:minWidth="90dp">
+
+                <ImageView
+                    android:id="@+id/imageView5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:src="@drawable/save_icon"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="0"
+                    android:textColor="@color/colorAccent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+        <TextView
+            android:id="@+id/post_content_post"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@{post.description}"
+            android:textColor="@color/textColor"
+            android:textSize="16dp"
+            app:layout_constraintEnd_toEndOf="@+id/cardView"
+            app:layout_constraintStart_toStartOf="@+id/user_avatar_post"
+            app:layout_constraintTop_toBottomOf="@id/user_avatar_post" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:minHeight="350dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="5dp"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="0dp"
+            app:layout_constraintEnd_toEndOf="@id/post_content_post"
+            app:layout_constraintStart_toStartOf="@id/post_content_post"
+            app:layout_constraintTop_toBottomOf="@id/post_content_post">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="350dp"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="173dp"
+                        android:foreground="@drawable/gradient_shape"
+                        imageFromUrl="@{post.photos.get(0).url.original}"
+                        app:layout_constraintTop_toTopOf="parent"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="173dp"
+                        android:orientation="horizontal"
+                        app:layout_constraintBottom_toBottomOf="parent">
+                        <LinearLayout
+                            android:layout_height="wrap_content"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:orientation="vertical" >
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="173dp"
+                                android:layout_marginRight="2dp"
+                                android:foreground="@drawable/gradient_shape"
+                                imageFromUrl="@{post.photos.get(1).url.original}"
+                                app:layout_constraintBottom_toBottomOf="parent"/>
+
+                        </LinearLayout>
+                        <!-- Right side spacer -->
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1" >
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="173dp"
+                                android:layout_marginLeft="2dp"
+                                android:foreground="@drawable/gradient_shape"
+                                imageFromUrl="@{post.photos.get(2).url.original}"
+                                app:layout_constraintBottom_toBottomOf="parent"/>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+                <!--   1  Video    -->
+                <com.google.android.exoplayer2.ui.PlayerView
+                    android:id="@+id/video_player_post"
+                    android:layout_width="match_parent"
+                    android:layout_height="350dp"
+                    app:resize_mode="zoom"
+                    android:visibility="@{post.videos == null || post.photos != null ? View.GONE : View.VISIBLE, default= gone}"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+
+
+
+
+                <ImageView
+                    android:id="@+id/location_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:src="@drawable/location_icon_light_32"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{post.place.title}"
+                    android:textColor="@color/textColorLight"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/location_icon"
+                    app:layout_constraintLeft_toRightOf="@id/location_icon"
+                    app:layout_constraintTop_toTopOf="@id/location_icon"
+                    app:layout_constraintVertical_bias="0.39" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </androidx.cardview.widget.CardView>
+
+        <ImageView
+            android:id="@+id/like_button_post"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="30dp"
+            android:src="@drawable/heart_icon"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cardView2" />
+
+        <TextView
+            android:id="@+id/like_counter_post"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{post.likeCounter.toString()}"
+            android:textColor="@color/textColor"
+            android:layout_marginLeft="5dp"
+            app:layout_constraintTop_toTopOf="@id/like_button_post"
+            app:layout_constraintLeft_toRightOf="@id/like_button_post"/>
+
+        <ImageView
+            android:id="@+id/comment_button_post"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/comment_icon"
+            android:layout_marginLeft="30dp"
+            app:layout_constraintLeft_toRightOf="@id/like_counter_post"
+            app:layout_constraintTop_toTopOf="@id/like_counter_post"/>
+
+        <TextView
+            android:id="@+id/comment_counter_post"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="@{post.commentCounter.toString()}"
+            android:textColor="@color/textColor"
+            app:layout_constraintLeft_toRightOf="@id/comment_button_post"
+            app:layout_constraintTop_toTopOf="@id/comment_button_post"/>
+
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/hr"
+            android:layout_marginTop="20dp"
+            app:layout_constraintTop_toBottomOf="@id/like_button_post" />
+
+
+
+
+
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,4 +1,4 @@
-package com.nguyen.string.data.interestData
+package com.nguyen.string.data
 
 data class Photo (
     var id: String? = null,

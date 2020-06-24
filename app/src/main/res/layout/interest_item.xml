@@ -6,7 +6,7 @@
 
         <variable
             name="interest"
-            type="com.nguyen.string.data.interestData.Interest" />
+            type="com.nguyen.string.data.Interest" />
 
     </data>
 

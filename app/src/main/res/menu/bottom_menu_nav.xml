@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <item android:id="@+id/home"
+        android:title=""
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/home_icon_32"
+        android:orderInCategory="1" />
+
+    <item android:id="@+id/search"
+        android:title=""
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/search_icon_32"
+        android:orderInCategory="2" />
+
+
+    <item android:id="@+id/add"
+        android:title=""
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/add_icon_32"
+        android:orderInCategory="3" />
+
+
+    <item android:id="@+id/notification"
+        android:title=""
+        app:showAsAction="always"
+        android:icon="@drawable/notification_icon_32"
+        android:orderInCategory="4"
+        />
+
+    <item android:id="@+id/user"
+        android:title=""
+        app:showAsAction="always"
+        android:icon="@drawable/user_icon_32"
+        android:orderInCategory="5" />
+
+</menu>

@@ -1,4 +1,4 @@
-package com.nguyen.string.data.authenticationData
+package com.nguyen.string.data
 
 import com.google.gson.annotations.SerializedName
 

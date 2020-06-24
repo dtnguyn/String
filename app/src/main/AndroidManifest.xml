@@ -4,6 +4,8 @@
     package="com.nguyen.string">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
 
 
     <application
@@ -16,8 +18,8 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="AllowBackup">
-        <activity android:name=".ui.LoggedActivity">
-        </activity>
+        <activity android:name=".ui.main.LoggedActivity"/>
+        <activity android:name=".ui.firstTime.FirstTimeActivity"/>
         <activity android:name=".ui.auth.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -1,16 +1,19 @@
 package com.nguyen.string.ui.firstTime
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.nguyen.string.R
+import com.nguyen.string.data.Interest
 import com.nguyen.string.databinding.FragmentFirstTimeBinding
 import com.nguyen.string.di.Injection
 import com.nguyen.string.ui.firstTime.adapter.FirstTimeAdapter
@@ -19,10 +22,23 @@ import com.nguyen.string.viewmodel.FirstTimeViewModel
 class FirstTimeFragment : Fragment() {
 
     companion object {
+
+        private val selectedInterestList: ArrayList<Interest> = ArrayList()
+
         private var PAGE: String = "INTEREST"
 
         fun getPage() : String{
             return PAGE
+        }
+
+        fun addInterest(interest: Interest){
+            selectedInterestList.add(interest)
+        }
+
+        fun removeInterest(id: Int){
+            selectedInterestList.filter {
+                it.id != id
+            }
         }
     }
 
@@ -52,7 +68,7 @@ class FirstTimeFragment : Fragment() {
         firstTimeViewModel.getUserList()
 
 
-        firstTimeViewModel.interestList.observe(this, Observer {
+        firstTimeViewModel.interestList.observe(viewLifecycleOwner, Observer {
             interestAdapter = FirstTimeAdapter(it, fun(counter: Int){
                 remain = 3 - counter
                 if(remain <= 0) {
@@ -76,10 +92,22 @@ class FirstTimeFragment : Fragment() {
             })
         })
 
-
+        binding.actionBar.nextButton.setOnClickListener {
+            when(getPage()){
+                "INTEREST" -> initFollowView(binding)
+                "FOLLOW" -> {
+                    Log.d("permission", "here")
+                    firstTimeViewModel.submitSelectedInterestList(selectedInterestList)
+                    findNavController().navigate(R.id.action_first_time_fragment_to_permission_fragment)
+                }
+            }
+        }
 
         return binding.root
     }
+
+
+
 
 
 
@@ -95,9 +123,6 @@ class FirstTimeFragment : Fragment() {
             } else {
                 nextButtonText = "Next"
                 nextButton.isEnabled = true
-            }
-            nextButton.setOnClickListener {
-                initFollowView(binding)
             }
         }
         binding.fragmentTitle = getString(R.string.interest_guide)

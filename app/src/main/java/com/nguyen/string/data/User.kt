@@ -1,7 +1,7 @@
-package com.nguyen.string.data.userData
+package com.nguyen.string.data
 
 import com.google.gson.annotations.SerializedName
-import com.nguyen.string.data.interestData.Photo
+import com.nguyen.string.data.Photo
 
 data class User (
     var id: String? = null,
