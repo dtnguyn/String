@@ -10,6 +10,7 @@ class FirstTimeViewModel (private val repository: MainRepository) : ViewModel(){
 
     private val interestResponse : MutableLiveData<ApiResponse<List<Interest>>> = MutableLiveData()
     private val usersResponse: MutableLiveData<ApiResponse<List<User>>> = MutableLiveData()
+    private val moreUserResponse: MutableLiveData<ApiResponse<List<User>>> = MutableLiveData()
 
     val interestList : LiveData<List<Interest>> = Transformations.map(interestResponse){
         it.data
@@ -19,17 +20,28 @@ class FirstTimeViewModel (private val repository: MainRepository) : ViewModel(){
         it.data
     }
 
+    val moreUserList : LiveData<List<User>> = Transformations.map(usersResponse){
+        it.data
+    }
+
     fun getInterestList(page: String? = null, currentPage: String? = null){
         repository.getInterestList(page, currentPage, fun(response : ApiResponse<List<Interest>>?) {
             interestResponse.value = response
         })
     }
 
-    fun getUserList(page: String? = null, currentPage: String? = null){
-        repository.getUserList(page, currentPage, fun(response : ApiResponse<List<User>>?) {
+    fun getUserList(){
+        repository.getUserList(fun(response : ApiResponse<List<User>>?) {
             usersResponse.value = response
         })
     }
+
+    fun getMoreUserList(){
+        repository.getMoreUserList {
+            moreUserResponse.value = it
+        }
+    }
+
 
     fun followUser(userId: String){
         repository.followUser(userId)

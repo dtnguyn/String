@@ -50,7 +50,7 @@
 
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/cardView"
+            android:id="@+id/save_button"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:layout_margin="15dp"
@@ -67,10 +67,10 @@
 
                 <ImageView
                     android:id="@+id/imageView5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
                     android:layout_margin="10dp"
-                    android:src="@drawable/save_icon"
+                    android:src="@drawable/logo_purpil"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -78,12 +78,10 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:text="0"
+                    android:text="@string/string"
                     android:textColor="@color/colorAccent"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/imageView5"
                     app:layout_constraintTop_toTopOf="parent" />
 
 
@@ -100,7 +98,7 @@
             android:layout_marginTop="20dp"
             android:layout_marginVertical="10dp"
             app:cardElevation="0dp"
-            app:layout_constraintEnd_toEndOf="@+id/cardView"
+            app:layout_constraintEnd_toEndOf="@+id/save_button"
             app:layout_constraintStart_toStartOf="@+id/location_icon"
             app:layout_constraintTop_toBottomOf="@+id/textView16">
 
@@ -214,6 +212,16 @@
             android:textColor="@color/textColor"
             app:layout_constraintLeft_toRightOf="@id/comment_button_poi"
             app:layout_constraintTop_toTopOf="@id/comment_button_poi"/>
+
+        <ImageView
+            android:id="@+id/menu_button"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/post_menu"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="15dp"
+            app:layout_constraintEnd_toEndOf="@+id/cardView2"
+            app:layout_constraintTop_toBottomOf="@+id/cardView2" />
 
 
         <View

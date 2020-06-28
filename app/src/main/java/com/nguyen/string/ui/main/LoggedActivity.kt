@@ -24,4 +24,8 @@ class LoggedActivity : AppCompatActivity() {
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.logged_fragment) as NavHostFragment
         NavigationUI.setupWithNavController(bottom_nav, navHostFragment.navController)
     }
+
+    fun hideBottomNav(){
+        bottom_nav.visibility = View.GONE
+    }
 }

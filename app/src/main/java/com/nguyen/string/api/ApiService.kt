@@ -1,7 +1,9 @@
 package com.nguyen.string.api
 
 import com.nguyen.string.data.*
+import okhttp3.RequestBody
 import retrofit2.Call
+import retrofit2.Callback
 import retrofit2.http.*
 
 interface ApiService {
@@ -38,6 +40,25 @@ interface ApiService {
         @Header("Authorization") token: String
     ): Call<ApiResponse<User>>
 
+    @FormUrlEncoded
+    @POST("post-save")
+    fun save(
+        @Field("id") id: Int,
+        @Header("Authorization") token: String
+    ): Call<ApiResponse<Blog>>
+
+    @FormUrlEncoded
+    @POST("post-save")
+    fun addComment(
+        @Field("ipps_id") id: Int,
+        @Field("comment") comment: String?,
+        @Field("replyID") replyId: String?,
+        @Field("commentchildID") commentChildId: String?,
+        @Field("tagUsername[]") tags: List<String>?,
+        @Header("Authorization") token: String
+    ): Call<ApiResponse<Comment>>
+
+
 
     @GET("interest-categories-list?")
     fun getInterestList(
@@ -60,12 +81,30 @@ interface ApiService {
         @Header("Authorization") token: String
     ): Call<ApiResponse<List<Blog>>>
 
+    @GET("comments-list/{ipps_id}")
+    fun getComments(
+        @Path("ipps_id") id: Int?,
+        @Query("page") page: String?,
+        @Query("current_per_page") currentPage: String?,
+        @Header("Authorization") token: String
+    ): Call<ApiResponse<List<Comment>>>
+
 
     @PUT("users-interest-categories-select")
     fun submitSelectedInterest(
         @Query("lists_interest[]") selectedInterestList: List<Interest>,
         @Header("Authorization") token: String
     ): Call<ApiResponse<User>>
+
+
+    @FormUrlEncoded
+    @PUT("like")
+    fun like(
+        @Field("ipps_id")id: Int,
+        @Header("Authorization") token: String
+    ): Call<ApiResponse<Blog>>
+
+
 
 
 }

@@ -17,6 +17,7 @@ import com.nguyen.string.data.Interest
 import com.nguyen.string.databinding.FragmentFirstTimeBinding
 import com.nguyen.string.di.Injection
 import com.nguyen.string.ui.firstTime.adapter.FirstTimeAdapter
+import com.nguyen.string.ui.main.FeedFragment
 import com.nguyen.string.viewmodel.FirstTimeViewModel
 
 class FirstTimeFragment : Fragment() {
@@ -86,10 +87,16 @@ class FirstTimeFragment : Fragment() {
             recyclerView.adapter = interestAdapter
         })
 
-        firstTimeViewModel.userList.observe(this, Observer {
+        firstTimeViewModel.userList.observe(viewLifecycleOwner, Observer {
             followAdapter = FirstTimeAdapter(it, {}, fun(userId: String){
                 firstTimeViewModel.followUser(userId)
             })
+            recyclerView.addOnScrollListener(ScrollListener(fun(recyclerView: RecyclerView) {
+                if (!recyclerView.canScrollVertically(1)) {
+                    firstTimeViewModel.getMoreUserList()
+                }
+            }))
+
         })
 
         binding.actionBar.nextButton.setOnClickListener {
@@ -155,6 +162,13 @@ class FirstTimeFragment : Fragment() {
     private fun firstTimeViewModel(): FirstTimeViewModel {
         val factory = Injection.provideInterestViewModel()
         return ViewModelProvider(this, factory)[FirstTimeViewModel::class.java]
+    }
+
+    class ScrollListener(val loadMore : (recyclerView: RecyclerView) -> Unit) : RecyclerView.OnScrollListener() {
+        override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+            super.onScrolled(recyclerView, dx, dy)
+            loadMore(recyclerView)
+        }
     }
 
 }

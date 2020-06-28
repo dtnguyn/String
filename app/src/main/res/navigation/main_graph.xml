@@ -7,31 +7,22 @@
     app:startDestination="@id/feed_fragment">
 
 
+
     <fragment
         android:id="@+id/feed_fragment"
         android:name="com.nguyen.string.ui.main.FeedFragment"
         android:label="feed_fragment"
-        tools:layout="@layout/fragment_feed"/>
-
-    <fragment
-        android:id="@+id/first_time_fragment"
-        android:name="com.nguyen.string.ui.firstTime.FirstTimeFragment"
-        android:label="set_up_fragment"
-        tools:layout="@layout/fragment_first_time">
-
+        tools:layout="@layout/fragment_feed">
         <action
-            android:id="@+id/action_first_time_fragment_to_permission_fragment"
-            app:destination="@id/permission_fragment" />
+            android:id="@+id/action_feed_fragment_to_comment_fragment2"
+            app:destination="@id/comment_fragment" />
     </fragment>
-
 
     <fragment
-        android:id="@+id/permission_fragment"
-        android:name="com.nguyen.string.ui.firstTime.PermissionFragment"
-        android:label="permission_fragment"
-        tools:layout="@layout/fragment_permission">
-
-    </fragment>
+        android:id="@+id/comment_fragment"
+        android:name="com.nguyen.string.ui.main.CommentFragment"
+        android:label="comment_fragment"
+        tools:layout="@layout/fragment_comment"/>
 
 
 </navigation>

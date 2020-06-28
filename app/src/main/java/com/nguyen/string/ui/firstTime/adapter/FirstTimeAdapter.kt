@@ -16,7 +16,7 @@ import com.nguyen.string.ui.firstTime.FirstTimeFragment.Companion.getPage
 import com.nguyen.string.ui.firstTime.FirstTimeFragment.Companion.removeInterest
 
 class FirstTimeAdapter(
-    private val interests: List<Any>,
+    private val mInterestsOrUsers: List<Any>,
     private val updateNextButton : (counter: Int) -> Unit = {},
     private val followUser: (userId: String) -> Unit = {}) : RecyclerView.Adapter<FirstTimeAdapter.BaseViewHolder>() {
 
@@ -164,15 +164,26 @@ class FirstTimeAdapter(
     }
 
     override fun getItemCount(): Int {
-        return interests.size
+        return mInterestsOrUsers.size
     }
 
     override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
         when(getPage()){
-            "INTEREST" -> holder.bind(interests[position] as Interest, hashMap, updateNextButton, {})
-            "FOLLOW" -> holder.bind(interests[position] as User, hashMap, {}, followUser)
+            "INTEREST" -> holder.bind(mInterestsOrUsers[position] as Interest, hashMap, updateNextButton, {})
+            "FOLLOW" -> holder.bind(mInterestsOrUsers[position] as User, hashMap, {}, followUser)
         }
 
     }
+
+    fun addUsersFollow(users: List<User>){
+        if(mInterestsOrUsers[0] !is User) return
+        mInterestsOrUsers as ArrayList<User>
+        users.forEach {
+            mInterestsOrUsers.add(it)
+            notifyItemInserted(mInterestsOrUsers.size - 1)
+        }
+    }
+
+
 
 }

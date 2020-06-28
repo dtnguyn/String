@@ -21,5 +21,7 @@ data class Blog (
     var place: Place? = null,
     var isSaved: Boolean? = null,
     var tags: List<Tag>? = null,
-    var copyCounter: Int? = null
+    var copyCounter: Int? = null,
+    var itineraries: List<Itinerary>? = null,
+    var websiteUrl: String? = null
 )

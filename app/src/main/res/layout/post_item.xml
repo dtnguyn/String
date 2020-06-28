@@ -35,32 +35,37 @@
         </androidx.cardview.widget.CardView>
 
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/textView17"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@{post.user.username}"
-            android:layout_marginTop="5dp"
             android:layout_marginLeft="10dp"
-            android:textStyle="bold"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/np_regular"
+            android:text="@{post.user.username}"
             android:textColor="@color/textColor"
             android:textSize="16sp"
-            app:layout_constraintStart_toEndOf="@+id/user_avatar_post"
+            android:textStyle="bold"
+            app:layout_constraintRight_toLeftOf="@+id/save_button"
+            app:layout_constraintLeft_toRightOf="@+id/user_avatar_post"
             app:layout_constraintTop_toTopOf="@+id/user_avatar_post" />
 
         <TextView
+            android:id="@+id/date_create_post"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@{post.createdAt}"
+            android:fontFamily="@font/np_regular"
             android:layout_marginStart="10dp"
-            android:layout_marginBottom="5dp"
+            android:layout_marginBottom="0dp"
             app:layout_constraintBottom_toBottomOf="@+id/user_avatar_post"
             app:layout_constraintStart_toEndOf="@+id/user_avatar_post" />
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/cardView"
+            android:id="@+id/save_button"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:layout_margin="15dp"
-            android:background="@color/background"
             android:minWidth="90dp"
             app:cardCornerRadius="30dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -82,10 +87,12 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
+                    android:id="@+id/save_counter_post"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
-                    android:text="0"
+                    android:text="@{post.saveCounter.toString()}"
+                    android:fontFamily="@font/np_regular"
                     android:textColor="@color/colorAccent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -105,8 +112,9 @@
             android:layout_marginTop="10dp"
             android:text="@{post.description}"
             android:textColor="@color/textColor"
+            android:fontFamily="@font/np_regular"
             android:textSize="16dp"
-            app:layout_constraintEnd_toEndOf="@+id/cardView"
+            app:layout_constraintEnd_toEndOf="@+id/save_button"
             app:layout_constraintStart_toStartOf="@+id/user_avatar_post"
             app:layout_constraintTop_toBottomOf="@id/user_avatar_post" />
 
@@ -145,7 +153,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="350dp"
                     app:resize_mode="zoom"
-                    android:visibility="@{post.videos == null || post.photos.size != 1 ? View.GONE : View.VISIBLE, default= gone}"
+                    android:visibility="@{post.videos == null ? View.GONE : View.VISIBLE, default= gone}"
                     app:layout_constraintTop_toTopOf="parent"/>
 
 
@@ -216,6 +224,16 @@
             android:textColor="@color/textColor"
             app:layout_constraintLeft_toRightOf="@id/comment_button_post"
             app:layout_constraintTop_toTopOf="@id/comment_button_post"/>
+
+        <ImageView
+            android:id="@+id/menu_button"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/post_menu"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="15dp"
+            app:layout_constraintEnd_toEndOf="@+id/cardView2"
+            app:layout_constraintTop_toBottomOf="@+id/cardView2" />
 
 
         <View

@@ -32,26 +32,26 @@ class LoginFragment : Fragment() {
 
         mainViewModel = mainViewModel()
 
-        mainViewModel.loginStatus.observe(this, Observer { status ->
+        mainViewModel.loginStatus.observe(viewLifecycleOwner, Observer { status ->
             view.loading_icon.visibility = View.GONE
-            Log.d("Login", "Login successfully: $status")
+            Log.d("Login", "Login Status: $status")
             if(status) {
-                view.error_bar.visibility = View.GONE
-                val intent = Intent(context, FirstTimeActivity::class.java)
+                val intent = Intent(context, LoggedActivity::class.java)
                 startActivity(intent)
-            }
-            else{
+            } else {
                 view.error_bar.visibility = View.VISIBLE
             }
         })
 
-        mainViewModel.loginMessage.observe(this, Observer { message ->
-            if(message != "") view.error_bar.text = message
+        mainViewModel.loginMessage.observe(viewLifecycleOwner, Observer { message ->
+            if(message != "") {
+                view.error_bar.text = message
+            }
         })
 
         view.login_button.setOnClickListener {
-
             view.loading_icon.visibility = View.VISIBLE
+            view.error_bar.visibility = View.GONE
             val email = view.email_edit_text_login.text.toString()
             val password  = view.password_edit_text_login.text.toString()
             mainViewModel.loginUser(email, password)

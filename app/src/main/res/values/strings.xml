@@ -176,4 +176,13 @@ Email: tre87@gmail.com]]></string>
     <string name="add">Add</string>
     <string name="search">Search</string>
     <string name="home">Home</string>
+    <string name="string">String</string>
+    <string name="more">MORE</string>
+    <string name="share_to">Share to...</string>
+    <string name="copy_link">Copy Link</string>
+    <string name="report">Report</string>
+    <string name="no_internet_connection">NO INTERNET CONNECTION</string>
+    <string name="seems_like_you_re_offline_please_check_your_internet_connection">Seems like you\'re offline. Please check your internet connection</string>
+    <string name="add_comment">Add Comment</string>
+    <string name="post">Post</string>
 </resources>
