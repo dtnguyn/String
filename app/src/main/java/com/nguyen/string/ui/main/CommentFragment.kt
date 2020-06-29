@@ -75,7 +75,10 @@ class CommentFragment : Fragment() {
                 Toast.makeText(requireContext(), "You have to type something first", Toast.LENGTH_SHORT).show()
             } else {
                 feedViewModel.addComment(id!!, comment, fun(result: Boolean){
-                    if(result) feedViewModel.getComments(id)
+                    if(result) {
+                        binding.editText.text.clear()
+                        feedViewModel.getComments(id)
+                    }
                 })
 
             }

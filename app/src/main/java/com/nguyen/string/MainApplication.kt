@@ -1,14 +1,9 @@
 package com.nguyen.string
 
 import android.app.Application
-import android.content.Context
-import android.util.JsonToken
 import android.util.Log
-import com.facebook.FacebookSdk
-import com.facebook.appevents.AppEventsLogger
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.iid.FirebaseInstanceId
-import com.nguyen.string.util.BottomMenuSettings
 import com.nguyen.string.util.SavedSharedPreferences
 
 class MainApplication : Application() {

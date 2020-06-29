@@ -28,4 +28,8 @@ class LoggedActivity : AppCompatActivity() {
     fun hideBottomNav(){
         bottom_nav.visibility = View.GONE
     }
+
+    fun showBottomNav(){
+        bottom_nav.visibility = View.VISIBLE
+    }
 }

@@ -48,7 +48,7 @@ interface ApiService {
     ): Call<ApiResponse<Blog>>
 
     @FormUrlEncoded
-    @POST("post-save")
+    @POST("comment-add")
     fun addComment(
         @Field("ipps_id") id: Int,
         @Field("comment") comment: String?,
@@ -88,6 +88,22 @@ interface ApiService {
         @Query("current_per_page") currentPage: String?,
         @Header("Authorization") token: String
     ): Call<ApiResponse<List<Comment>>>
+
+    @GET("profile/{users_id}")
+    fun getUserProfile(
+        @Path("users_id") userId: Int,
+        @Header("Authorization") token: String
+    ): Call<ApiResponse<User>>
+
+    @GET("profile-post/{user_id}")
+    fun getUserProfilePosts(
+        @Path("user_id") userId: Int,
+        @Query("page") page: String?,
+        @Query("current_per_page") currentPage: String?,
+        @Header("Authorization") token: String
+    ): Call<ApiResponse<List<Blog>>>
+
+
 
 
     @PUT("users-interest-categories-select")

@@ -26,6 +26,9 @@ object MainRepository{
     private var commentCurrentPage: Int = 1
     private var isLoadingMoreComments = false
 
+    private var profilePostsCurrentPage: Int = 1
+    private var isLoadingProfilePosts = false
+
 
     init {
         SavedSharedPreferences.loggedUser.let {
@@ -222,10 +225,14 @@ object MainRepository{
                 call: Call<ApiResponse<List<Blog>>>,
                 response: Response<ApiResponse<List<Blog>>>
             ) {
-                response.body().let {
-                    Log.d("Feed", "Success: ${it?.message}")
-                    callback.invoke(it)
+                if(response.body() == null){
+                    Log.d("Feed", "Fail: ${response.code()}")
+                    callback.invoke(ApiResponse(response.code(), "", false, ArrayList<Blog>()))
+                } else {
+                    Log.d("Feed", "Success: ${response.body()?.message}")
+                    callback.invoke(response.body())
                 }
+
             }
         })
     }
@@ -364,7 +371,6 @@ object MainRepository{
 
     fun addComment(id: Int, comment: String, callback: (Boolean) -> Unit){
 
-
         val call = currentLoggedUser?.accessToken?.let{
             Log.d("Comment", "Adding comment... $id $it")
             MyRetrofitBuilder.apiService.addComment(id, comment, "", "", emptyList(),"Bearer $it")
@@ -385,10 +391,59 @@ object MainRepository{
                     callback(it)
                 }
             }
-
         })
-
     }
 
+    fun getUserProfile(callback: (ApiResponse<User>) -> Unit){
+        val call = currentLoggedUser?.let{
+            Log.d("Profile", "Getting user profile... ${it.id} ${it.accessToken}")
+            MyRetrofitBuilder.apiService.getUserProfile(it.id!!,"Bearer ${it.accessToken}")
+        }
 
+        call?.enqueue(object : Callback<ApiResponse<User>>{
+            override fun onFailure(call: Call<ApiResponse<User>>, t: Throwable) {
+                Log.d("Profile", "Fail: ${t.message}")
+            }
+
+            override fun onResponse(
+                call: Call<ApiResponse<User>>,
+                response: Response<ApiResponse<User>>
+            ) {
+                Log.d("Comment", "Success: ${response.body()}")
+
+                response.body()?.let {
+                    callback(it)
+                }
+            }
+
+        })
+    }
+
+    fun getUserProfilePosts(callback: (ApiResponse<List<Blog>>) -> Unit){
+        profilePostsCurrentPage = 1
+        val call = currentLoggedUser?.let{
+            Log.d("Profile", "Getting posts... ${it.id} ${it.accessToken}")
+            MyRetrofitBuilder.apiService.getUserProfilePosts(it.id!!, profilePostsCurrentPage.toString(), ITEM_PER_PAGE.toString(),"Bearer ${it.accessToken}")
+        }
+
+        call?.enqueue(object  : Callback<ApiResponse<List<Blog>>>{
+            override fun onFailure(call: Call<ApiResponse<List<Blog>>>, t: Throwable) {
+                Log.d("Profile", "Fail: ${t.message}")
+            }
+
+            override fun onResponse(
+                call: Call<ApiResponse<List<Blog>>>,
+                response: Response<ApiResponse<List<Blog>>>
+            ) {
+                if(response.body() == null){
+                    Log.d("Profile", "Fail: ${response.code()}")
+                    callback.invoke(ApiResponse(response.code(), "", false, null))
+                } else {
+                    Log.d("Profile", "Success: ${response.body()!!.message}")
+                    callback.invoke(response.body()!!)
+                }
+
+            }
+        })
+    }
 }

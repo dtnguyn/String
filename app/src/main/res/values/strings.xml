@@ -185,4 +185,9 @@ Email: tre87@gmail.com]]></string>
     <string name="seems_like_you_re_offline_please_check_your_internet_connection">Seems like you\'re offline. Please check your internet connection</string>
     <string name="add_comment">Add Comment</string>
     <string name="post">Post</string>
+    <string name="posts">Posts</string>
+    <string name="itineraries">ITINERARIES</string>
+    <string name="following">FOLLOWING</string>
+    <string name="followers">FOLLOWERS</string>
+    <string name="posts_cap">POSTS</string>
 </resources>

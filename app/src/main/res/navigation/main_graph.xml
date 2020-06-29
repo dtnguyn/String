@@ -24,5 +24,13 @@
         android:label="comment_fragment"
         tools:layout="@layout/fragment_comment"/>
 
+    <fragment
+        android:id="@+id/profile_fragment"
+        android:name="com.nguyen.string.ui.main.ProfileFragment"
+        android:label="profile_fragment"
+        tools:layout="@layout/fragment_profile"/>
+
+
+
 
 </navigation>

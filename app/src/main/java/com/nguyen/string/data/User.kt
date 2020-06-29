@@ -16,5 +16,9 @@ data class User (
     var checkFollow: Boolean? = null,
     var currentLocation: String? =  null,
     var isSuperUser: Boolean? = null,
-    var photos: List<Photo>? = null
+    var photos: List<Photo>? = null,
+    var followingCounter: Int? = null,
+    var postsCounter: Int? = null,
+    var itineraryCounter: Int? = null,
+    var followerCounter: Int? = null
 )

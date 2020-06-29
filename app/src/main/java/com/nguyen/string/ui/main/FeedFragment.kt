@@ -1,13 +1,11 @@
 package com.nguyen.string.ui.main
 
-import android.content.Context
 import android.content.Intent
-import android.net.ConnectivityManager
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -22,6 +20,7 @@ import com.nguyen.string.di.Injection
 import com.nguyen.string.ui.auth.MainActivity
 import com.nguyen.string.ui.main.adapter.FeedAdapter
 import com.nguyen.string.util.BottomMenuSettings
+import com.nguyen.string.util.SavedSharedPreferences
 import com.nguyen.string.viewmodel.FeedViewModel
 
 
@@ -52,8 +51,11 @@ class FeedFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(context)
 
         feedViewModel.code.observe(viewLifecycleOwner, Observer {
+            Log.d("Feed", "checking code")
             if(it == 401){
-                val intent = Intent(context, MainActivity::class.java)
+                SavedSharedPreferences.isLogin = false
+                SavedSharedPreferences.loggedUser = null
+                val intent = Intent(requireContext(), MainActivity::class.java)
                 startActivity(intent)
             }
         })
@@ -79,6 +81,7 @@ class FeedFragment : Fragment() {
         })
 
 
+
         feedViewModel.getFeed()
 
 
@@ -98,5 +101,9 @@ class FeedFragment : Fragment() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
 
+        (activity as LoggedActivity).showBottomNav()
+    }
 }
