@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <import type="android.view.View" />
+        <variable
+            name="type"
+            type="Integer" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/action_bar_post_detail"
+            layout="@layout/action_bar"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <include
+            android:id="@+id/post_1"
+            layout="@layout/post_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="@{type == 1 ? View.VISIBLE : View.GONE}"
+            app:layout_constraintTop_toBottomOf="@+id/action_bar_post_detail" />
+
+        <include
+            android:id="@+id/post_2"
+            layout="@layout/post_2_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="@{type == 2 ? View.VISIBLE : View.GONE, default= gone}"
+            app:layout_constraintTop_toBottomOf="@+id/action_bar_post_detail" />
+
+        <include
+            android:id="@+id/post_3"
+            layout="@layout/post_3_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="@{type == 3 ? View.VISIBLE : View.GONE, default= gone}"
+            app:layout_constraintTop_toBottomOf="@+id/action_bar_post_detail" />
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

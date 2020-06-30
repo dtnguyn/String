@@ -65,7 +65,6 @@ class CommentFragment : Fragment() {
                 id?.let {
                     feedViewModel.getMoreComments(id)
                 }
-
             }
         }))
 

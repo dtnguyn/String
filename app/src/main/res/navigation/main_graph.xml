@@ -30,6 +30,12 @@
         android:label="profile_fragment"
         tools:layout="@layout/fragment_profile"/>
 
+    <fragment
+        android:id="@+id/post_detail_fragment"
+        android:name="com.nguyen.string.ui.main.PostDetailFragment"
+        android:label="post_detail_fragment"
+        tools:layout="@layout/fragment_post_detail"/>
+
 
 
 

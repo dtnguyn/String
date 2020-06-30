@@ -4,20 +4,29 @@
 
     <data>
 
+        <import type="android.view.View"/>
+        <variable
+            name="isEmpty"
+            type="Boolean" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Saves fragment"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <include
+            android:id="@+id/no_saved_posts"
+            layout="@layout/error"
+            android:visibility="@{isEmpty != false ? View.VISIBLE : View.GONE, default= gone}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/saved_posts_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toBottomOf="@id/no_saved_posts" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

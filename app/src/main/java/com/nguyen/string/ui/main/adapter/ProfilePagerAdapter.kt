@@ -2,9 +2,9 @@ package com.nguyen.string.ui.main.adapter
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.nguyen.string.ui.main.profileNestedFragments.ItinerariesFragment
-import com.nguyen.string.ui.main.profileNestedFragments.PostsFragment
-import com.nguyen.string.ui.main.profileNestedFragments.SavesFragment
+import com.nguyen.string.ui.main.profilePagerFragments.ItinerariesFragment
+import com.nguyen.string.ui.main.profilePagerFragments.PostsFragment
+import com.nguyen.string.ui.main.profilePagerFragments.SavesFragment
 
 class ProfilePagerAdapter (fragment: Fragment) : FragmentStateAdapter(fragment){
 

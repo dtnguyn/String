@@ -29,6 +29,12 @@ object MainRepository{
     private var profilePostsCurrentPage: Int = 1
     private var isLoadingProfilePosts = false
 
+    private var profileItinerariesCurrentPage: Int = 1
+    private var isLoadingProfileItineraries = false
+
+    private var profileSavedPostsCurrentPage: Int = 1
+    private var isLoadingProfileSavedPosts = false
+
 
     init {
         SavedSharedPreferences.loggedUser.let {
@@ -443,6 +449,182 @@ object MainRepository{
                     callback.invoke(response.body()!!)
                 }
 
+            }
+        })
+    }
+
+    fun getMoreUserProfilePosts(callback: (ApiResponse<List<Blog>>) -> Unit){
+        if(isLoadingProfilePosts) return
+        isLoadingProfilePosts = true
+        profilePostsCurrentPage++
+        val call = currentLoggedUser?.let{
+            Log.d("Profile", "Getting posts... ${it.id} ${it.accessToken}")
+            MyRetrofitBuilder.apiService.getUserProfilePosts(it.id!!, profilePostsCurrentPage.toString(), ITEM_PER_PAGE.toString(),"Bearer ${it.accessToken}")
+        }
+
+        call?.enqueue(object  : Callback<ApiResponse<List<Blog>>>{
+            override fun onFailure(call: Call<ApiResponse<List<Blog>>>, t: Throwable) {
+                Log.d("Profile", "Fail: ${t.message}")
+                isLoadingProfilePosts = false
+            }
+
+            override fun onResponse(
+                call: Call<ApiResponse<List<Blog>>>,
+                response: Response<ApiResponse<List<Blog>>>
+            ) {
+                if(response.body() == null){
+                    Log.d("Profile", "Fail: ${response.code()}")
+                    callback.invoke(ApiResponse(response.code(), "", false, null))
+                } else {
+                    Log.d("Profile", "Success: ${response.body()!!.message}")
+                    callback.invoke(response.body()!!)
+                }
+                isLoadingProfilePosts = false
+            }
+        })
+    }
+
+    fun getPostDetail(postId: Int, callback: (ApiResponse<Blog>) -> Unit){
+        val call = currentLoggedUser?.accessToken?.let{
+            Log.d("Profile", "Getting post detail... $postId $it")
+            MyRetrofitBuilder.apiService.getPostDetail(postId,"Bearer $it")
+        }
+
+        call?.enqueue(object: Callback<ApiResponse<Blog>>{
+            override fun onFailure(call: Call<ApiResponse<Blog>>, t: Throwable) {
+                Log.d("Profile", "Fail: ${t.message}")
+            }
+
+            override fun onResponse(
+                call: Call<ApiResponse<Blog>>,
+                response: Response<ApiResponse<Blog>>
+            ) {
+                if(response.body() == null){
+                    Log.d("Profile", "Fail: ${response.code()}")
+                    callback.invoke(ApiResponse(response.code(), "", false, null))
+                } else {
+                    Log.d("Profile", "Success: ${response.body()!!.message}")
+                    callback.invoke(response.body()!!)
+                }
+            }
+
+        })
+    }
+
+    fun getUserProfileItinerary(callback: (ApiResponse<List<Blog>>) -> Unit){
+        profileItinerariesCurrentPage = 1
+        val call = currentLoggedUser?.let{
+            Log.d("Profile", "Getting itineraries... ${it.id} ${it.accessToken}")
+            MyRetrofitBuilder.apiService.getUserProfileItinerary(it.id!!, profileItinerariesCurrentPage.toString(), ITEM_PER_PAGE.toString(),"Bearer ${it.accessToken}")
+        }
+
+        call?.enqueue(object  : Callback<ApiResponse<List<Blog>>>{
+            override fun onFailure(call: Call<ApiResponse<List<Blog>>>, t: Throwable) {
+                Log.d("Profile", "Fail: ${t.message}")
+            }
+
+            override fun onResponse(
+                call: Call<ApiResponse<List<Blog>>>,
+                response: Response<ApiResponse<List<Blog>>>
+            ) {
+                if(response.body() == null){
+                    Log.d("Profile", "Fail: ${response.code()}")
+                    callback.invoke(ApiResponse(response.code(), "", false, null))
+                } else {
+                    Log.d("Profile", "Success: ${response.body()!!.message} ${response.body()?.data?.size}")
+                    callback.invoke(response.body()!!)
+                }
+
+            }
+        })
+    }
+
+    fun getMoreUserProfileItinerary(callback: (ApiResponse<List<Blog>>) -> Unit){
+        if(isLoadingProfileItineraries) return
+        isLoadingProfileItineraries = true
+        profileItinerariesCurrentPage++
+
+        val call = currentLoggedUser?.let{
+            Log.d("Profile", "Getting itineraries... ${it.id} ${it.accessToken}")
+            MyRetrofitBuilder.apiService.getUserProfileItinerary(it.id!!, profileItinerariesCurrentPage.toString(), ITEM_PER_PAGE.toString(),"Bearer ${it.accessToken}")
+        }
+
+        call?.enqueue(object  : Callback<ApiResponse<List<Blog>>>{
+            override fun onFailure(call: Call<ApiResponse<List<Blog>>>, t: Throwable) {
+                Log.d("Profile", "Fail: ${t.message}")
+                isLoadingProfileItineraries = false
+            }
+
+            override fun onResponse(
+                call: Call<ApiResponse<List<Blog>>>,
+                response: Response<ApiResponse<List<Blog>>>
+            ) {
+                if(response.body() == null){
+                    Log.d("Profile", "Fail: ${response.code()}")
+                    callback.invoke(ApiResponse(response.code(), "", false, null))
+                } else {
+                    Log.d("Profile", "Success: ${response.body()!!.message} ${response.body()?.data?.size}")
+                    callback.invoke(response.body()!!)
+                }
+                isLoadingProfileItineraries = false
+            }
+        })
+    }
+
+    fun getUserProfileSavedPosts(callback: (ApiResponse<List<Blog>>) -> Unit){
+        profileSavedPostsCurrentPage = 1
+        val call = currentLoggedUser?.let{
+            Log.d("Profile", "Getting saved posts... ${it.id} ${it.accessToken}")
+            MyRetrofitBuilder.apiService.getUserProfileSavedPosts(it.id!!, profileSavedPostsCurrentPage.toString(), ITEM_PER_PAGE.toString(),"Bearer ${it.accessToken}")
+        }
+
+        call?.enqueue(object: Callback<ApiResponse<List<Blog>>>{
+            override fun onFailure(call: Call<ApiResponse<List<Blog>>>, t: Throwable) {
+                Log.d("Profile", "Fail: ${t.message}")
+            }
+
+            override fun onResponse(
+                call: Call<ApiResponse<List<Blog>>>,
+                response: Response<ApiResponse<List<Blog>>>
+            ) {
+                if(response.body() == null){
+                    Log.d("Profile", "Fail: ${response.code()}")
+                    callback.invoke(ApiResponse(response.code(), "", false, null))
+                } else {
+                    Log.d("Profile", "Success: ${response.body()!!.message} ${response.body()?.data?.size}")
+                    callback.invoke(response.body()!!)
+                }
+            }
+        })
+    }
+
+    fun getMoreUserProfileSavedPosts(callback: (ApiResponse<List<Blog>>) -> Unit){
+        if(isLoadingProfileSavedPosts) return
+        isLoadingProfileSavedPosts = true
+        profileSavedPostsCurrentPage++
+        val call = currentLoggedUser?.let{
+            Log.d("Profile", "Getting more saved posts... ${it.id} ${it.accessToken}")
+            MyRetrofitBuilder.apiService.getUserProfileSavedPosts(it.id!!, profileSavedPostsCurrentPage.toString(), ITEM_PER_PAGE.toString(),"Bearer ${it.accessToken}")
+        }
+
+        call?.enqueue(object: Callback<ApiResponse<List<Blog>>>{
+            override fun onFailure(call: Call<ApiResponse<List<Blog>>>, t: Throwable) {
+                Log.d("Profile", "Fail: ${t.message}")
+                isLoadingProfileSavedPosts = false
+            }
+
+            override fun onResponse(
+                call: Call<ApiResponse<List<Blog>>>,
+                response: Response<ApiResponse<List<Blog>>>
+            ) {
+                if(response.body() == null){
+                    Log.d("Profile", "Fail: ${response.code()}")
+                    callback.invoke(ApiResponse(response.code(), "", false, null))
+                } else {
+                    Log.d("Profile", "Success: ${response.body()!!.message} ${response.body()?.data?.size}")
+                    callback.invoke(response.body()!!)
+                }
+                isLoadingProfileSavedPosts = false
             }
         })
     }

@@ -103,7 +103,27 @@ interface ApiService {
         @Header("Authorization") token: String
     ): Call<ApiResponse<List<Blog>>>
 
+    @GET("post-detail/{id_post}")
+    fun getPostDetail(
+        @Path("id_post") postId: Int,
+        @Header("Authorization") token: String
+    ): Call<ApiResponse<Blog>>
 
+    @GET("profile-itinerary/{user_id}")
+    fun getUserProfileItinerary(
+        @Path("user_id") userId: Int,
+        @Query("page") page: String?,
+        @Query("current_per_page") currentPage: String?,
+        @Header("Authorization") token: String
+    ): Call<ApiResponse<List<Blog>>>
+
+    @GET("profile-save/{user_id}")
+    fun getUserProfileSavedPosts(
+        @Path("user_id") userId: Int,
+        @Query("page") page: String?,
+        @Query("current_per_page") currentPage: String?,
+        @Header("Authorization") token: String
+    ): Call<ApiResponse<List<Blog>>>
 
 
     @PUT("users-interest-categories-select")

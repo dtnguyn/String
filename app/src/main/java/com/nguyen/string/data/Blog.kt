@@ -23,5 +23,10 @@ data class Blog (
     var tags: List<Tag>? = null,
     var copyCounter: Int? = null,
     var itineraries: List<Itinerary>? = null,
-    var websiteUrl: String? = null
+    var websiteUrl: String? = null,
+    @SerializedName("CountItinerarySections")
+    var countItinerarySections: Int? = null,
+    @SerializedName("CountItineraryPlaces")
+    var countItineraryPlaces: Int? = null,
+    var isPrivate: Boolean? = null
 )

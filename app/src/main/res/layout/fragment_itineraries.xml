@@ -3,6 +3,10 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
+        <import type="android.view.View"/>
+        <variable
+            name="isEmpty"
+            type="Boolean" />
 
     </data>
 
@@ -10,14 +14,18 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:layout_width="wrap_content"
+        <include
+            android:id="@+id/no_itineraries"
+            layout="@layout/error"
+            android:visibility="@{isEmpty != false ? View.VISIBLE : View.GONE, default= gone}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/itineraries_recyclerview"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Itineraries fragment"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/no_post" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
