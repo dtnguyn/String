@@ -1,7 +1,6 @@
 package com.nguyen.string.repository
 
 import android.util.Log
-import androidx.room.Room
 import com.nguyen.string.MainApplication
 import com.nguyen.string.api.MyRetrofitBuilder
 import com.nguyen.string.data.*
@@ -256,7 +255,7 @@ object MainRepository{
             ) {
                 if(response.body() == null){
                     Log.d("Feed", "Fail: ${response.code()}")
-                    callback.invoke(ApiResponse(response.code(), "", false, ArrayList<Blog>()))
+                    callback.invoke(ApiResponse(response.code(), "", false, ArrayList()))
                 } else {
                     Log.d("Feed", "Success: ${response.body()?.message}")
                     callback.invoke(response.body())
@@ -701,9 +700,6 @@ object MainRepository{
         })
     }
 
-
-
-    suspend fun getProfileFromDB(id: Int) = profileDao?.getProfile(id)
 
 
 }

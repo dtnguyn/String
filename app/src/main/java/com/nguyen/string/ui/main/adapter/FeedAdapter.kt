@@ -189,9 +189,6 @@ class FeedAdapter(private val blogs: ArrayList<Blog>,
                 }
             }
         }
-
-
-
     }
 
     class Post3ViewHolder(private val binding: Post3ItemBinding) : BaseViewHolder(binding.root) {

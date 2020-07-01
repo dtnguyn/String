@@ -12,7 +12,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.nguyen.string.R
 import com.nguyen.string.di.Injection
-import com.nguyen.string.ui.firstTime.FirstTimeActivity
 import com.nguyen.string.ui.main.LoggedActivity
 import com.nguyen.string.viewmodel.MainViewModel
 import kotlinx.android.synthetic.main.fragment_login.view.*

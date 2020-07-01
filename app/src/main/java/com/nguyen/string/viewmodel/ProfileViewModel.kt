@@ -3,10 +3,7 @@ package com.nguyen.string.viewmodel
 import androidx.lifecycle.*
 import com.nguyen.string.data.ApiResponse
 import com.nguyen.string.data.Blog
-import com.nguyen.string.data.Comment
 import com.nguyen.string.data.User
-import com.nguyen.string.databinding.FragmentFeedBinding
-import com.nguyen.string.databinding.FragmentProfileBinding
 import com.nguyen.string.repository.MainRepository
 
 class ProfileViewModel(private val repository: MainRepository) : ViewModel() {

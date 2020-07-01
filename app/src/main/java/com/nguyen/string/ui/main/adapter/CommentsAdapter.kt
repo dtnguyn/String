@@ -35,9 +35,4 @@ class CommentsAdapter(private val comments: ArrayList<Comment>) : RecyclerView.A
             notifyItemInserted(comments.size - 1)
         }
     }
-
-    fun addComment(_comment: Comment){
-        comments.add(0, _comment)
-        notifyItemInserted(0)
-    }
 }

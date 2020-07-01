@@ -7,7 +7,6 @@ import android.widget.LinearLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.nguyen.string.data.Blog
 import com.nguyen.string.databinding.ProfilePostItemBinding
-import com.nguyen.string.ui.main.profilePagerFragments.PostsFragment
 import com.nguyen.string.ui.main.profilePagerFragments.SavesFragment
 
 class ProfileSavedPostAdapter(private val fragment: SavesFragment, private val posts: ArrayList<Blog>, private val postLength: Int): RecyclerView.Adapter<ProfileSavedPostAdapter.BaseViewHolder>() {

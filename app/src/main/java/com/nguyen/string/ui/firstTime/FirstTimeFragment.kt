@@ -17,7 +17,6 @@ import com.nguyen.string.data.Interest
 import com.nguyen.string.databinding.FragmentFirstTimeBinding
 import com.nguyen.string.di.Injection
 import com.nguyen.string.ui.firstTime.adapter.FirstTimeAdapter
-import com.nguyen.string.ui.main.FeedFragment
 import com.nguyen.string.viewmodel.FirstTimeViewModel
 
 class FirstTimeFragment : Fragment() {

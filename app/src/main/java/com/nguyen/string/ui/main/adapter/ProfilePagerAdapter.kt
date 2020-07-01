@@ -12,10 +12,6 @@ class ProfilePagerAdapter (fragment: Fragment) : FragmentStateAdapter(fragment){
     private val itinerariesFragment = ItinerariesFragment()
     private val savesFragment = SavesFragment()
 
-    companion object{
-        private const val ARG_OBJECT = "object"
-    }
-
 
     override fun getItemCount(): Int {
         return 3

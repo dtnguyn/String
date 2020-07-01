@@ -44,8 +44,8 @@ class ProfilePostAdapter(private val fragment: PostsFragment, private val posts:
     }
 
     fun addPosts(_posts: List<Blog>?) {
-        _posts?.let{
-            if(it.isEmpty()) return
+        _posts?.let{ _posts ->
+            if(_posts.isEmpty()) return
             _posts.forEach {
                 posts.add(it)
                 notifyItemInserted(posts.size - 1)
