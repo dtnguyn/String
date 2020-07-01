@@ -1,10 +1,15 @@
 package com.nguyen.string.repository
 
 import android.util.Log
+import androidx.room.Room
 import com.nguyen.string.MainApplication
 import com.nguyen.string.api.MyRetrofitBuilder
 import com.nguyen.string.data.*
+import com.nguyen.string.data.database.*
 import com.nguyen.string.util.SavedSharedPreferences
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -16,6 +21,10 @@ object MainRepository{
 
     var verificationEmail : String? = null
     private var currentLoggedUser: AuthData? = null
+    private var currentUserProfile: Profile? = null
+    private var currentUserProfilePosts: ProfilePosts? = null
+    private var currentUserProfileItineraries: ProfileItineraries? = null
+    private var currentUserProfileSavedPosts: ProfileSavedPosts? = null
 
     private var userFollowCurrentPage: Int = 1
     private var isLoadingUserFollow = false
@@ -35,11 +44,25 @@ object MainRepository{
     private var profileSavedPostsCurrentPage: Int = 1
     private var isLoadingProfileSavedPosts = false
 
+    private var profileDao: ProfileDao? = null
 
     init {
-        SavedSharedPreferences.loggedUser.let {
+
+        val db = MainApplication.context?.let { ProfileDatabase.getDatabase(it) }
+        profileDao = db?.profileDao()
+
+
+        SavedSharedPreferences.loggedUser?.let {
             currentLoggedUser = it
-            Log.d("Login", "token: ${it?.accessToken}")
+
+            CoroutineScope(Dispatchers.IO).launch {
+                currentUserProfile = profileDao?.getProfile(it.id!!)
+                currentUserProfilePosts = profileDao?.getProfilePosts(it.id!!)
+                currentUserProfileItineraries = profileDao?.getProfileItineraries(it.id!!)
+                currentUserProfileSavedPosts = profileDao?.getProfileSavedPosts(it.id!!)
+            }
+
+            Log.d("Login", "token: ${it.accessToken}")
         }
     }
 
@@ -409,16 +432,38 @@ object MainRepository{
         call?.enqueue(object : Callback<ApiResponse<User>>{
             override fun onFailure(call: Call<ApiResponse<User>>, t: Throwable) {
                 Log.d("Profile", "Fail: ${t.message}")
+                currentUserProfile?.let {
+                    callback(ApiResponse(null, "", true,
+                        User(
+                            id = it.id,
+                            username = it.username,
+                            bio = it.bio,
+                            profilePhoto = it.profilePhoto,
+                            postsCounter = it.postCount,
+                            followerCounter = it.followerCount,
+                            followingCounter = it.followingCount,
+                            itineraryCounter = it.itineraryCount
+                        )
+                    ))
+                }
+
             }
 
             override fun onResponse(
                 call: Call<ApiResponse<User>>,
                 response: Response<ApiResponse<User>>
             ) {
-                Log.d("Comment", "Success: ${response.body()}")
+                Log.d("Profile", "Success: ${response.body()}")
 
                 response.body()?.let {
                     callback(it)
+                }
+
+                response.body()?.data?.let {
+                    CoroutineScope(Dispatchers.IO).launch {
+                        profileDao?.setProfile(Profile(it.id, it.username, it.bio, it.profilePhoto, it.postsCounter, it.itineraryCounter, it.followingCounter, it.followerCounter))
+                    }
+
                 }
             }
 
@@ -435,6 +480,10 @@ object MainRepository{
         call?.enqueue(object  : Callback<ApiResponse<List<Blog>>>{
             override fun onFailure(call: Call<ApiResponse<List<Blog>>>, t: Throwable) {
                 Log.d("Profile", "Fail: ${t.message}")
+                currentUserProfilePosts?.posts?.let{
+                    callback.invoke(ApiResponse(400, "", false, it))
+                }
+
             }
 
             override fun onResponse(
@@ -443,12 +492,16 @@ object MainRepository{
             ) {
                 if(response.body() == null){
                     Log.d("Profile", "Fail: ${response.code()}")
-                    callback.invoke(ApiResponse(response.code(), "", false, null))
+                    callback.invoke(ApiResponse(response.code(), "", false, currentUserProfilePosts?.posts))
                 } else {
                     Log.d("Profile", "Success: ${response.body()!!.message}")
                     callback.invoke(response.body()!!)
+                    response.body()?.data?.let {
+                        CoroutineScope(Dispatchers.IO).launch {
+                            profileDao?.setProfilePosts(ProfilePosts(currentLoggedUser?.id, it))
+                        }
+                    }
                 }
-
             }
         })
     }
@@ -521,6 +574,10 @@ object MainRepository{
         call?.enqueue(object  : Callback<ApiResponse<List<Blog>>>{
             override fun onFailure(call: Call<ApiResponse<List<Blog>>>, t: Throwable) {
                 Log.d("Profile", "Fail: ${t.message}")
+                currentUserProfileItineraries?.itineraries?.let{
+                    callback.invoke(ApiResponse(400, "", false, it))
+                }
+
             }
 
             override fun onResponse(
@@ -533,8 +590,13 @@ object MainRepository{
                 } else {
                     Log.d("Profile", "Success: ${response.body()!!.message} ${response.body()?.data?.size}")
                     callback.invoke(response.body()!!)
-                }
+                    response.body()?.data?.let {
+                        CoroutineScope(Dispatchers.IO).launch {
+                            profileDao?.setProfileItineraries(ProfileItineraries(currentLoggedUser?.id, it))
+                        }
 
+                    }
+                }
             }
         })
     }
@@ -581,6 +643,10 @@ object MainRepository{
         call?.enqueue(object: Callback<ApiResponse<List<Blog>>>{
             override fun onFailure(call: Call<ApiResponse<List<Blog>>>, t: Throwable) {
                 Log.d("Profile", "Fail: ${t.message}")
+                currentUserProfileSavedPosts?.savedPosts?.let {
+                    callback.invoke(ApiResponse(400, "", false, it))
+                }
+
             }
 
             override fun onResponse(
@@ -589,10 +655,16 @@ object MainRepository{
             ) {
                 if(response.body() == null){
                     Log.d("Profile", "Fail: ${response.code()}")
-                    callback.invoke(ApiResponse(response.code(), "", false, null))
+                    callback.invoke(ApiResponse(response.code(), "", false, currentUserProfileSavedPosts?.savedPosts))
                 } else {
                     Log.d("Profile", "Success: ${response.body()!!.message} ${response.body()?.data?.size}")
                     callback.invoke(response.body()!!)
+
+                    response.body()?.data?.let {
+                        CoroutineScope(Dispatchers.IO).launch {
+                            profileDao?.setProfileSavedPosts(ProfileSavedPosts(currentLoggedUser?.id, it))
+                        }
+                    }
                 }
             }
         })
@@ -628,4 +700,10 @@ object MainRepository{
             }
         })
     }
+
+
+
+    suspend fun getProfileFromDB(id: Int) = profileDao?.getProfile(id)
+
+
 }

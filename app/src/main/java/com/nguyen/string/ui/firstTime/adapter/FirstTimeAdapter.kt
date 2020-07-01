@@ -96,7 +96,7 @@ class FirstTimeAdapter(
 
             var userId: String
             interestOrUser.let {
-                userId = it.id!!
+                userId = it.toString()
                 binding.user = it
             }
 

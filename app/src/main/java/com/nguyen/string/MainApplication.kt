@@ -1,6 +1,7 @@
 package com.nguyen.string
 
 import android.app.Application
+import android.content.Context
 import android.util.Log
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.iid.FirebaseInstanceId
@@ -10,13 +11,14 @@ class MainApplication : Application() {
 
     companion object{
         var token: String? = null
+        var context: Context? = null
     }
 
 
     override fun onCreate() {
         super.onCreate()
         generateMsgToken()
-
+        context = this
         SavedSharedPreferences.init(this)
 //        FacebookSdk.sdkInitialize(applicationContext);
 //        AppEventsLogger.activateApp(this);
@@ -34,6 +36,8 @@ class MainApplication : Application() {
                 token = task.result?.token
             })
     }
+
+
 
 
 

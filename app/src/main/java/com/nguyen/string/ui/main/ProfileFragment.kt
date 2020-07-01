@@ -21,6 +21,7 @@ import com.nguyen.string.data.Comment
 import com.nguyen.string.databinding.FragmentCommentBinding
 import com.nguyen.string.databinding.FragmentFeedBinding
 import com.nguyen.string.databinding.FragmentProfileBinding
+import com.nguyen.string.databinding.FragmentProfileCollapsingBinding
 import com.nguyen.string.di.Injection
 import com.nguyen.string.ui.main.adapter.CommentsAdapter
 import com.nguyen.string.ui.main.adapter.FeedAdapter
@@ -44,7 +45,7 @@ class ProfileFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        val binding = FragmentProfileBinding.inflate(inflater, container, false)
+        val binding = FragmentProfileCollapsingBinding.inflate(inflater, container, false)
 
 
         profileViewModel = profileViewModel()

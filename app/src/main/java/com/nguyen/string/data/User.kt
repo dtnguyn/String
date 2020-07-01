@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 
 data class User (
-    var id: String? = null,
+    var id: Int? = null,
     var username: String? = null,
     var email: String? = null,
     var facebookID: String? = null,
