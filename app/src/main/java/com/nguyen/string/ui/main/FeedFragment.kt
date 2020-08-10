@@ -66,6 +66,7 @@ class FeedFragment : Fragment() {
                 findNavController().navigate(R.id.comment_fragment, bundle)
                 (activity as LoggedActivity).hideBottomNav()
             })
+            feedAdapter?.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.ALLOW
             recyclerView.adapter = feedAdapter
         })
 

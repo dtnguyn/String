@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">String</string>
-    <string name="facebook_app_id">700970877384605</string> <string name="fb_login_protocol_scheme">fb700970877384605</string>
+    <string name="facebook_app_id">700970877384605</string>
+    <string name="fb_login_protocol_scheme">fb700970877384605</string>
     <string name="MenuTitle">Discover the Endless Possibilities of travel</string>
     <string name="sign_up_button_text">Sign Up with email</string>
     <string name="sign_up_with_facebook_button_text">Sign up with facebook</string>
@@ -184,10 +185,14 @@ Email: tre87@gmail.com]]></string>
     <string name="no_internet_connection">NO INTERNET CONNECTION</string>
     <string name="seems_like_you_re_offline_please_check_your_internet_connection">Seems like you\'re offline. Please check your internet connection</string>
     <string name="add_comment">Add Comment</string>
-    <string name="post">Post</string>
     <string name="posts">Posts</string>
     <string name="itineraries">ITINERARIES</string>
     <string name="following">FOLLOWING</string>
     <string name="followers">FOLLOWERS</string>
     <string name="posts_cap">POSTS</string>
+    <string name="create">CREATE</string>
+    <string name="post">Post</string>
+    <string name="itinerary">Itinerary</string>
+    <string name="library">LIBRARY</string>
+    <string name="camera">CAMERA</string>
 </resources>

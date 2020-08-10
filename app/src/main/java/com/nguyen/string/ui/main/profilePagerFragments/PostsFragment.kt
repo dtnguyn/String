@@ -43,6 +43,7 @@ class PostsFragment : Fragment() {
 
         profileViewModel.userPosts.observe(viewLifecycleOwner, Observer {
             adapter = ProfilePostAdapter(this, it as ArrayList<Blog>, width/3 - 5)
+            adapter?.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.ALLOW
             if(it.isEmpty()) {
                 binding.isEmpty = true
                 binding.noPost.errorBackground.setImageResource(R.drawable.empty_post_icon)

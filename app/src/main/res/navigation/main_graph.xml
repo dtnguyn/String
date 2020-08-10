@@ -3,9 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/first_time_graph"
+    android:id="@+id/main_graph"
     app:startDestination="@id/feed_fragment">
-
 
 
     <fragment
@@ -28,13 +27,15 @@
         android:id="@+id/profile_fragment"
         android:name="com.nguyen.string.ui.main.ProfileFragment"
         android:label="profile_fragment"
-        tools:layout="@layout/fragment_profile"/>
+        tools:layout="@layout/fragment_profile_collapsing">
+    </fragment>
 
     <fragment
         android:id="@+id/post_detail_fragment"
         android:name="com.nguyen.string.ui.main.PostDetailFragment"
         android:label="post_detail_fragment"
         tools:layout="@layout/fragment_post_detail"/>
+
 
 
 

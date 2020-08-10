@@ -35,13 +35,12 @@ class PermissionFragment : Fragment() {
                     Log.d("Permission", "Request Permission result: $result")
                     initLocationPermission(binding)
                 })
-                "LOCATION" -> requestPermission(Manifest.permission.ACCESS_COARSE_LOCATION, fun(result: Boolean){
+                    "LOCATION" -> requestPermission(Manifest.permission.ACCESS_COARSE_LOCATION, fun(result: Boolean){
                     val intent = Intent(requireContext(), LoggedActivity::class.java)
                     startActivity(intent)
                 })
             }
         }
-
         return binding.root
     }
 
@@ -76,4 +75,7 @@ class PermissionFragment : Fragment() {
             callback(true)
         }
     }
+
+
+
 }

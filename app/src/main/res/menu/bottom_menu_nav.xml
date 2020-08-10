@@ -16,7 +16,7 @@
         android:orderInCategory="2" />
 
 
-    <item android:id="@+id/add"
+    <item android:id="@+id/add_fragment"
         android:title=""
         app:showAsAction="ifRoom"
         android:icon="@drawable/add_icon_32"

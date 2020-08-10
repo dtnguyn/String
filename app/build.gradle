@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId "com.nguyen.string"
-        minSdkVersion 23
+        minSdkVersion 21
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
@@ -18,15 +18,15 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
-    signingConfigs
-            {
-                debug {
-                    storeFile file('../string_key.jks')
-                    storePassword "123123"
-                    keyAlias "key0"
-                    keyPassword "123123"
-                }
-            }
+//    signingConfigs
+//            {
+//                debug {
+//                    storeFile file('../string_key.jks')
+//                    storePassword "123123"
+//                    keyAlias "key0"
+//                    keyPassword "123123"
+//                }
+//            }
 
     buildTypes {
         release {
@@ -76,6 +76,10 @@ dependencies {
     implementation "androidx.activity:activity:1.2.0-alpha06"
     implementation "androidx.fragment:fragment:1.3.0-alpha06"
 
+    implementation "androidx.recyclerview:recyclerview:1.2.0-alpha04"
+    implementation "androidx.viewpager2:viewpager2:1.1.0-alpha01"
+
+
     // -- Retrofit2
     def retrofit2_version = "2.9.0"
     implementation "com.squareup.retrofit2:retrofit:$retrofit2_version"
@@ -94,7 +98,7 @@ dependencies {
 
     //glide
     implementation 'com.github.bumptech.glide:glide:4.11.0'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
+    kapt 'com.github.bumptech.glide:compiler:4.11.0'
 
     implementation 'com.google.android.exoplayer:exoplayer-core:2.11.5'
     implementation 'com.google.android.exoplayer:exoplayer-dash:2.11.5'
@@ -112,6 +116,17 @@ dependencies {
     // optional - Kotlin Extensions and Coroutines support for Room
     implementation "androidx.room:room-ktx:$room_version"
 
+    // CameraX core library using the camera2 implementation
+    def camerax_version = "1.0.0-beta06"
+    // The following line is optional, as the core library is included indirectly by camera-camera2
+    implementation "androidx.camera:camera-core:${camerax_version}"
+    implementation "androidx.camera:camera-camera2:${camerax_version}"
+    // If you want to additionally use the CameraX Lifecycle library
+    implementation "androidx.camera:camera-lifecycle:${camerax_version}"
+    // If you want to additionally use the CameraX View class
+    implementation "androidx.camera:camera-view:1.0.0-alpha13"
+    // If you want to additionally use the CameraX Extensions library
+    implementation "androidx.camera:camera-extensions:1.0.0-alpha13"
 
 
 

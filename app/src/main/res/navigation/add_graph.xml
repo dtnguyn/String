@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/add_graph"
+    app:startDestination="@id/library_fragment">
+
+    <fragment
+        android:id="@+id/library_fragment"
+        android:label="@string/library"
+        android:name="com.nguyen.string.ui.add.LibraryFragment"
+        tools:layout="@layout/fragment_library"/>
+
+    <fragment
+        android:id="@+id/camera_fragment"
+        android:label="camera"
+        android:name="com.nguyen.string.ui.add.CameraFragment"
+        tools:layout="@layout/fragment_camera"/>
+
+    <fragment
+        android:id="@+id/preview_fragment"
+        android:label="preview"
+        android:name="com.nguyen.string.ui.add.PreviewFragment"
+        tools:layout="@layout/fragment_preview"/>
+
+
+
+
+</navigation>
