@@ -1,4 +1,4 @@
-# String
+# String (Remake)
 
 #### This is a remake of the String app that was already finished and published on the Google Play Store by Vinova. I build this app as part of the training program during my internship at Vinova. 
 #### The url to the real app: https://play.google.com/store/apps/details?id=vinova.sg.string
